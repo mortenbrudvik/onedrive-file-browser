@@ -4,4 +4,4 @@ export const FileBrowser = () => {
         <h1>File Browser</h1>
         </div>
     );
-    };
+};
