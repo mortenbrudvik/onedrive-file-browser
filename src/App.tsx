@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import {FileBrowser} from "./features";
 
 function App() {
   return (
     <div>
-
+      <FileBrowser />
     </div>
   );
 }
