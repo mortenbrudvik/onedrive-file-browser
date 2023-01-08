@@ -1,1 +1,1 @@
-export {FileBrowser} from './FileBrowser/FileBrowser';
+export {FilePicker} from './FilePicker/FilePicker';

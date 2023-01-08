@@ -1,10 +1,10 @@
 import React from 'react';
-import {FileBrowser} from "./features";
+import {FilePicker} from "./features";
 
 function App() {
   return (
     <div>
-      <FileBrowser />
+        <FilePicker/>
     </div>
   );
 }
