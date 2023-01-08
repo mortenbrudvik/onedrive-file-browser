@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import {IFilePickerOptions, IAuthenticateCommand, SPItem} from "../types";
+import {IFilePickerOptions, IAuthenticateCommand} from "../types";
 import { combine } from "@pnp/core";
 
 export interface BrowserProps {

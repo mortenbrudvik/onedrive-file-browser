@@ -3,6 +3,10 @@ import { IFilePickerOptions } from "./types";
 import { getToken } from "./auth";
 import Browser from "./components/Browser";
 
+/*
+* Schema for the options object
+* https://learn.microsoft.com/en-us/onedrive/developer/controls/file-pickers/v8-schema?source=recommendations&view=odsp-graph-online
+*/
 const paramsTest: IFilePickerOptions = {
     sdk: "8.0",
     entry: {
@@ -22,8 +26,21 @@ const paramsTest: IFilePickerOptions = {
         pivots: {
             oneDrive: true,
             recent: true,
+            // shared: true,
+            // search: true,
         }
+    },
+    commands: {
+        pick: {
+            action: "select",
+            label: "Select",
+        },
+        close: {
+            label: "Cancel"
+        },
     }
+            
+            
 };
 
 export const FilePicker = () => {
