@@ -1,5 +1,8 @@
 ## OneDrive File Browser
 
+Is based on the OneDrive File picker [sample](https://github.com/OneDrive/samples/tree/master/samples/file-picking) from Microsoft, 
+but instead of opening up in a new browser window it's displayed inline in an IFrame. 
+
 ### Setup
 
 **Under API Permissions (Azure AD: Register app)**
