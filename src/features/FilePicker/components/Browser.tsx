@@ -49,8 +49,8 @@ async function messageListener(getToken: (message: IAuthenticateCommand) => Prom
                     }
 
                     break;
-
-                case "open":
+                    
+                case "pick":
 
                     port.postMessage({
                         type: "result",
@@ -62,10 +62,20 @@ async function messageListener(getToken: (message: IAuthenticateCommand) => Prom
 
                     console.log(`OPEN >> ${JSON.stringify(command)}`);
 
-                    alert(`Intercepted "open" command for .txt file: ${command.item.name}`);
 
                     break;
-
+                
+                case "close":
+                    console.log("close");
+                    port.postMessage({
+                        type: "result",
+                        id: message.data.id,
+                        data: {
+                            result: "success",
+                        },
+                    });
+                    break;
+                    
                 default:
 
                     console.warn(`Unsupported command: ${JSON.stringify(command)}`, 2);
