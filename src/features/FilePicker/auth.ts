@@ -1,5 +1,4 @@
 import { PublicClientApplication, Configuration, SilentRequest } from "@azure/msal-browser";
-import { combine } from "@pnp/core";
 import { IAuthenticateCommand } from "./types";
 
 const msalParams: Configuration = {
@@ -14,7 +13,7 @@ const app = new PublicClientApplication(msalParams);
 
 export async function getToken(command: IAuthenticateCommand): Promise<string> {
 
-    return getTokenWithScopes([`${combine(command.resource, ".default")}`]);
+    return getTokenWithScopes([command.resource + "/.default"]);
 }
 
 export async function getTokenWithScopes(scopes: string[], additionalAuthParams?: Omit<SilentRequest, "scopes">): Promise<string> {

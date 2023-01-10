@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import {IFilePickerOptions, IAuthenticateCommand} from "../types";
-import { combine } from "@pnp/core";
 
 export interface BrowserProps {
     baseUrl: string;
@@ -124,7 +123,7 @@ function Browser(props: BrowserProps) {
                 const queryString = new URLSearchParams({
                     filePicker: JSON.stringify(options),
                 });
-                const url = combine(baseUrl, `_layouts/15/FilePicker.aspx?${queryString}`);
+                const url = baseUrl + `_layouts/15/FilePicker.aspx?${queryString}`;
 
                 const form = contentWindow.document.createElement("form");
                 form.setAttribute("action", url);
