@@ -183,14 +183,56 @@ interface ITypesAndSourcesConfiguration {
      * Configures whether or not specific pivots may be browsed for content by the user.
      */
     pivots?: {
-        recent?: boolean;
-        oneDrive?: boolean;
+        /**
+         * Show "My files".
+         */
+        oneDrive?: boolean | IPivotCommandConfiguration;
+        /**
+         * Show "Photos". Consumer accounts only.
+         */
+        photos?: boolean | IPivotCommandConfiguration;
+        /**
+         * Show "Recent".
+         */
+        recent?: boolean | IPivotCommandConfiguration;
+        /**
+         * Show "Shared"
+         */
+        shared?: boolean | IPivotCommandConfiguration;
+        /**
+         * Show "Mobile device". The host app must be able to authenticate this service separately.
+         */
+        phoneLink?: boolean;
+        /**
+         * Show "Communities". The host app must be Yammer.
+         */
+        yammerCommunities?: boolean;
+        /**
+         * Show "Cloud storage". The host app must be Teams.
+         */
+        teamsCloudStorage?: boolean;
+        /**
+         * Show "Quick access".
+         */
         sharedLibraries?: boolean;
-        shared?: boolean;
-        search?: boolean;
-        myLists?: boolean;
+        /**
+         * Show "Stock images".
+         */
+        stockImages?: boolean;
+        /**
+         * Show "Bing search".
+         */
         bing?: boolean;
+        /**
+         * Show "My lists".
+         */
+        myLists?: boolean;
     };
+}
+
+export interface IPivotCommandConfiguration {
+    key?: string;
+    action: "custom" | "open";
 }
 interface IAccessibilityConfiguration {
     focusTrap?: 'initial' | 'always' | 'none';

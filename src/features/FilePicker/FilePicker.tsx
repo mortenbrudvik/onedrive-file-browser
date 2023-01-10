@@ -26,9 +26,7 @@ const paramsTest: IFilePickerOptions = {
         pivots: {
             oneDrive: true,
             recent: true,
-            //sharedLibraries: true,
-            //myLists: true,
-            //bing: false,
+            sharedLibraries: true,
         }
     },
     commands: {
