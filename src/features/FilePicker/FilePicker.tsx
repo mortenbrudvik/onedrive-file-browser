@@ -26,8 +26,9 @@ const paramsTest: IFilePickerOptions = {
         pivots: {
             oneDrive: true,
             recent: true,
-            // shared: true,
-            // search: true,
+            //sharedLibraries: true,
+            //myLists: true,
+            //bing: false,
         }
     },
     commands: {
@@ -39,8 +40,6 @@ const paramsTest: IFilePickerOptions = {
             label: "Cancel"
         },
     }
-            
-            
 };
 
 export const FilePicker = () => {

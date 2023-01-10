@@ -5,9 +5,14 @@ but instead of opening up in a new browser window it's displayed inline in an IF
 
 ### Setup
 
-**Under API Permissions (Azure AD: Register app)**
-Add ``Files.Read.All``, ``Sites.Read.All``, Leave ``User.Read`` for Graph delegated permissions
+**Under API Permissions (Azure AD: Register app)**<br>
+Add ``Files.Read.All``, ``Sites.Read.All``, Leave ``User.Read`` for Graph delegated permissions.<br>
 Add ``AllSites.Read``, ``MyFiles.Read`` for SharePoint delegated permissions
+
+NB! The below features need additional permissions that is not described in the documentation from MS.
+Shared libraries (Quick access list): Add ``Sites.ReadWrite.All`` 
+Your Teams (under more places): Add ``ChannelSettings.Read.All``
+
 
 ### Picker configuration in code
 

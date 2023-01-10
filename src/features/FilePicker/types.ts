@@ -188,6 +188,8 @@ interface ITypesAndSourcesConfiguration {
         sharedLibraries?: boolean;
         shared?: boolean;
         search?: boolean;
+        myLists?: boolean;
+        bing?: boolean;
     };
 }
 interface IAccessibilityConfiguration {
