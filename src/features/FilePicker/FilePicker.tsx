@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { IFilePickerOptions } from "./types";
 import { getToken } from "./auth";
 import Browser from "./components/Browser";
@@ -40,11 +40,18 @@ const paramsTest: IFilePickerOptions = {
     }
 };
 
-export const FilePicker = () => {
+type FilePickerProps = {
+    onClose: () => void;
+    onPicked: (files: string[]) => void;
+}
+
+export const FilePicker = ({onClose, onPicked}: FilePickerProps) => {
 
     return (
         <div>
-            <Browser baseUrl="https://x2lzs.sharepoint.com/" getToken={getToken} options={paramsTest} />
+            <Browser baseUrl="https://x2lzs.sharepoint.com/" getToken={getToken} options={paramsTest} onClose={onClose} onPicked={(files) => {
+                onPicked(files.map((file) => file.name))}
+            } />
         </div>
     );
 };

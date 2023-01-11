@@ -1,14 +1,15 @@
 import React, { useRef, useEffect } from "react";
-import {IFilePickerOptions, IAuthenticateCommand} from "../types";
+import {IFilePickerOptions, IAuthenticateCommand, SPItem} from "../types";
 
 export interface BrowserProps {
     baseUrl: string;
     getToken: (message: IAuthenticateCommand) => Promise<string>;
     options: IFilePickerOptions;
-    onOpen?: (items: any[]) => void;
+    onPicked: (items: SPItem[]) => void;
+    onClose: () => void;
 }
 
-async function messageListener(getToken: (message: IAuthenticateCommand) => Promise<string>, port: MessagePort, message: any) {
+async function messageListener(onClose: () => void, getToken: (message: IAuthenticateCommand) => Promise<string>, port: MessagePort, message: any) {
 
     switch (message.data.type) {
 
@@ -60,6 +61,9 @@ async function messageListener(getToken: (message: IAuthenticateCommand) => Prom
                     });
 
                     console.log(`OPEN >> ${JSON.stringify(command)}`);
+                    
+                    const items = command.items as SPItem[];
+                    console.log(items);
 
 
                     break;
@@ -73,6 +77,8 @@ async function messageListener(getToken: (message: IAuthenticateCommand) => Prom
                             result: "success",
                         },
                     });
+                    
+                    onClose();
                     break;
                     
                 default:
@@ -102,7 +108,7 @@ async function messageListener(getToken: (message: IAuthenticateCommand) => Prom
 // file browser control
 function Browser(props: BrowserProps) {
 
-    const { baseUrl, getToken, options } = props;
+    const { baseUrl, getToken, options, onPicked, onClose } = props;
 
     const iframeRef: React.MutableRefObject<HTMLIFrameElement | null> = useRef(null);
 
@@ -112,7 +118,7 @@ function Browser(props: BrowserProps) {
 
             if (iframeRef && iframeRef.current !== null && iframeRef.current.contentWindow) {
 
-                const { contentWindow } = iframeRef.current;
+                const {contentWindow} = iframeRef.current;
 
                 const authToken = await getToken({
                     resource: baseUrl,
@@ -138,8 +144,7 @@ function Browser(props: BrowserProps) {
 
                 form.submit();
 
-                window.addEventListener("message", (event) => {
-
+                const messageEventHandler = (event: MessageEvent<any>) => {
                     if (event.source && event.source === contentWindow) {
 
                         const message = event.data;
@@ -148,7 +153,7 @@ function Browser(props: BrowserProps) {
 
                             const port = event.ports[0];
 
-                            port.addEventListener("message", messageListener.bind(null, getToken, port));
+                            port.addEventListener("message", messageListener.bind(null, onClose, getToken, port));
 
                             port.start();
 
@@ -157,9 +162,14 @@ function Browser(props: BrowserProps) {
                             });
                         }
                     }
-                });
-            }
+                };
 
+                window.addEventListener("message", messageEventHandler);
+
+                return () => {
+                    window.removeEventListener("message", messageEventHandler);
+                };
+            }
         })();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
