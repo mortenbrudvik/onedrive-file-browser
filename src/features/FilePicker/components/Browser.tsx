@@ -9,7 +9,7 @@ export interface BrowserProps {
     onClose: () => void;
 }
 
-async function messageListener(onClose: () => void, getToken: (message: IAuthenticateCommand) => Promise<string>, port: MessagePort, message: any) {
+async function messageListener(onPicked: (items: SPItem[]) => void, onClose: () => void, getToken: (message: IAuthenticateCommand) => Promise<string>, port: MessagePort, message: any) {
 
     switch (message.data.type) {
 
@@ -63,8 +63,7 @@ async function messageListener(onClose: () => void, getToken: (message: IAuthent
                     console.log(`OPEN >> ${JSON.stringify(command)}`);
                     
                     const items = command.items as SPItem[];
-                    console.log(items);
-
+                    onPicked(items)
 
                     break;
                 
@@ -153,7 +152,7 @@ function Browser(props: BrowserProps) {
 
                             const port = event.ports[0];
 
-                            port.addEventListener("message", messageListener.bind(null, onClose, getToken, port));
+                            port.addEventListener("message", messageListener.bind(null, onPicked, onClose, getToken, port));
 
                             port.start();
 

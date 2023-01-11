@@ -42,15 +42,29 @@ const paramsTest: IFilePickerOptions = {
 
 type FilePickerProps = {
     onClose: () => void;
-    onPicked: (files: string[]) => void;
+    onPicked: (files: FileItem[]) => void;
 }
+
+export type FileItem = {
+    id: string;
+    name: string;
+    url: string;
+};
+    
 
 export const FilePicker = ({onClose, onPicked}: FilePickerProps) => {
 
     return (
         <div>
             <Browser baseUrl="https://x2lzs.sharepoint.com/" getToken={getToken} options={paramsTest} onClose={onClose} onPicked={(files) => {
-                onPicked(files.map((file) => file.name))}
+
+                onPicked(files.map((file) => {
+                    return {
+                        id: file.id,
+                        name: file.name,
+                        url: file.webUrl
+                    }
+                }))}
             } />
         </div>
     );
