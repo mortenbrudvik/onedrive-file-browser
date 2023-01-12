@@ -59,7 +59,7 @@ const FileManager = () => {
                     })
                 }</tbody>
             </Table>
-            <Modal opened={showPicker} title="Testing" onClose={() => setShowPicker(false)} size="90%">
+            <Modal opened={showPicker} title="OneDrive File Picker" onClose={() => setShowPicker(false)} size="90%">
                 <FilePicker onClose={() => setShowPicker(false)} onPicked={(files) => {
                     setFiles(files)
                     setShowPicker(false);
