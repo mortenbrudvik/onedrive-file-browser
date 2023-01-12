@@ -1,12 +1,18 @@
 import React, { useRef, useEffect } from "react";
 import {IFilePickerOptions, IAuthenticateCommand, SPItem} from "../types";
+import {Providers} from "@microsoft/mgt-element";
 
 export interface BrowserProps {
     baseUrl: string;
-    getToken: (message: IAuthenticateCommand) => Promise<string>;
     options: IFilePickerOptions;
     onPicked: (items: SPItem[]) => void;
     onClose: () => void;
+}
+
+export async function getToken(command: IAuthenticateCommand): Promise<string> {
+
+    console.log(command);
+    return  await Providers.globalProvider.getAccessToken({ scopes:[command.resource + "/.default"] });
 }
 
 async function messageListener(onPicked: (items: SPItem[]) => void, onClose: () => void, getToken: (message: IAuthenticateCommand) => Promise<string>, port: MessagePort, message: any) {
@@ -30,7 +36,6 @@ async function messageListener(onPicked: (items: SPItem[]) => void, onClose: () 
 
                 case "authenticate":
 
-                    // getToken is from scripts/auth.js
                     const token = await getToken(command);
 
                     if (typeof token !== "undefined" && token !== null) {
@@ -107,7 +112,7 @@ async function messageListener(onPicked: (items: SPItem[]) => void, onClose: () 
 // file browser control
 function Browser(props: BrowserProps) {
 
-    const { baseUrl, getToken, options, onPicked, onClose } = props;
+    const { baseUrl, options, onPicked, onClose } = props;
 
     const iframeRef: React.MutableRefObject<HTMLIFrameElement | null> = useRef(null);
 

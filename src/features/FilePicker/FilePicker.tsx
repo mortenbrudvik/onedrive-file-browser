@@ -1,6 +1,5 @@
 import React from 'react';
 import { IFilePickerOptions } from "./types";
-import { getToken } from "./auth";
 import Browser from "./components/Browser";
 
 /*
@@ -56,7 +55,7 @@ export const FilePicker = ({onClose, onPicked}: FilePickerProps) => {
 
     return (
         <div>
-            <Browser baseUrl="https://x2lzs.sharepoint.com/" getToken={getToken} options={paramsTest} onClose={onClose} onPicked={(files) => {
+            <Browser baseUrl="https://x2lzs.sharepoint.com/" options={paramsTest} onClose={onClose} onPicked={(files) => {
 
                 onPicked(files.map((file) => {
                     return {
