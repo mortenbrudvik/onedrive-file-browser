@@ -180,7 +180,7 @@ function Browser(props: BrowserProps) {
     }, [iframeRef]);
 
     return (
-        <iframe ref={iframeRef} title="browserFrame" id="browserFrame" width="100%" height="800" frameBorder={0} />
+        <iframe ref={iframeRef} title="browserFrame" id="browserFrame" width="100%" height="600" frameBorder={0} />
     );
 }
 
