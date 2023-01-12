@@ -1,0 +1,8 @@
+﻿mgt-login {
+    /*--button-background-color: transparent;*/
+    --button-background-color--hover: transparent;
+}
+
+.custom-mgt-dark {
+    --button-color: darkgray;
+}

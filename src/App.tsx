@@ -1,24 +1,52 @@
 import React, {useState} from 'react';
 import {FilePicker} from "./features";
-import {Button, Modal, Table, Title} from "@mantine/core";
+import {Button, Divider, Group, Modal, Table, Title} from "@mantine/core";
 import {FileItem} from "./features/FilePicker/FilePicker";
-
-
+import {useIsSignedIn} from "./hooks/useIsSignIn";
+import {Login, MgtTemplateProps, Person, PersonViewType} from "@microsoft/mgt-react";
+import {User} from "@microsoft/microsoft-graph-types";
+import './App.css';
 
 function App() {
     
-    const [files, setFiles] = useState<FileItem[]>([]);
-    const [showPicker, setShowPicker] = useState(false);
+
+
+    const [isSignedIn] = useIsSignedIn();
+    console.log("isSignedIn: " +isSignedIn);
     
     return (
         <div style={{margin: '20px'}}>
+            
+            <Group position="apart">
+                <Title>File Manager</Title>
+                <Login className="custom-mgt-dark">
+                    <UserDetails template="signed-in-button-content"/>
+                </Login>
+            </Group>
+            
+            <Divider mb={30}/>
+
+            {isSignedIn && <FileManager/>}
+
+        </div>
+    );
+}
+
+export default App;
+
+const FileManager = () => {
+    const [files, setFiles] = useState<FileItem[]>([]);
+    const [showPicker, setShowPicker] = useState(false);
+
+    return (
+        <div >
             <Button onClick={() => setShowPicker(true)}>Add files</Button>
             <Table>
                 <thead>
-                    <tr>
-                        <th>File name</th>
-                        <th>Url</th>
-                    </tr>
+                <tr>
+                    <th>File name</th>
+                    <th>Url</th>
+                </tr>
                 </thead>
                 <tbody>{
                     files.map((file) => {
@@ -36,10 +64,14 @@ function App() {
                     setFiles(files)
                     setShowPicker(false);
                 }}/>
-                
+
             </Modal>
         </div>
     );
-}
+};
 
-export default App;
+const UserDetails = (props: MgtTemplateProps) => {
+    const me = props.dataContext as User;
+
+    return (<Person className="custom-mgt-dark" personQuery="me" view={PersonViewType.oneline} />)
+};
