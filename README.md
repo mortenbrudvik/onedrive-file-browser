@@ -10,14 +10,11 @@ It uses the [Graph Toolkit](https://docs.microsoft.com/en-us/graph/toolkit/overv
 ### Setup
 
 **Under API Permissions (Azure AD: Register app)**<br>
-Add ``Files.Read.All``, ``Sites.Read.All``, Leave ``User.Read`` for Graph delegated permissions.<br>
-Add ``AllSites.Read``, ``MyFiles.Read`` for SharePoint delegated permissions
+Minimal permissions needed: ``Sites.Read.All`` and ``User.Read``<br><br>
 
-NB! The below features need additional permissions that is not described in the documentation from MS.
-Shared libraries (Quick access list): Add ``Sites.ReadWrite.All`` 
-Your Teams (under more places): Add ``ChannelSettings.Read.All``
-
-
+To enable File upload; create folder; move files/folders; site pinning; add ``Sites.ReadWrite.All`` instead of ``Sites.Read.All``<br>
+Also ``Channel.ReadBasic.All`` should be added to make "In channels" list work and not show an error.
+ 
 ### Picker configuration in code
 
 See [Schema](https://learn.microsoft.com/en-us/onedrive/developer/controls/file-pickers/v8-schema?view=odsp-graph-online) on how to configure the picker
@@ -25,7 +22,7 @@ See [Schema](https://learn.microsoft.com/en-us/onedrive/developer/controls/file-
 Picker url is on the format ``{baseUrl}/_layouts/15/FilePicker.aspx``
 
 The {baseUrl} value above is either the SharePoint web url<br>
-``<Browser baseUrl="https://{baseurl}.sharepoint.com/" getToken={getToken} options={paramsTest} />``
+``<Browser baseUrl="https://{baseurl}.sharepoint.com/" options={paramsTest} />``
 
 ## Usage
 ### Login

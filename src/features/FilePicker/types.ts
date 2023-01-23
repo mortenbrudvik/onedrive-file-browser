@@ -22,6 +22,9 @@ export interface IFilePickerOptions {
      */
     accessibility?: IAccessibilityConfiguration;
     navigation?: INavigationConfiguration;
+    "search": {
+        "enabled": true
+    }
 }
 export interface IAuthenticateCommand {
     command: 'authenticate';

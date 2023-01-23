@@ -11,7 +11,7 @@ export interface BrowserProps {
 
 export async function getToken(command: IAuthenticateCommand): Promise<string> {
 
-    console.log(command);
+    console.log("resource: " + command.resource);
     return  await Providers.globalProvider.getAccessToken({ scopes:[command.resource + "/.default"] });
 }
 
@@ -86,7 +86,6 @@ async function messageListener(onPicked: (items: SPItem[]) => void, onClose: () 
                     break;
                     
                 default:
-
                     console.warn(`Unsupported command: ${JSON.stringify(command)}`, 2);
 
                     port.postMessage({
@@ -180,7 +179,7 @@ function Browser(props: BrowserProps) {
     }, [iframeRef]);
 
     return (
-        <iframe ref={iframeRef} title="browserFrame" id="browserFrame" width="100%" height="600" frameBorder={0} />
+        <iframe ref={iframeRef} title="browserFrame" id="browserFrame" width="100%" height="800" frameBorder={0} />
     );
 }
 

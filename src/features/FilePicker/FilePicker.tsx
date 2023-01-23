@@ -28,6 +28,9 @@ const paramsTest: IFilePickerOptions = {
             sharedLibraries: true,
         }
     },
+    search: {
+        enabled: true
+    },
     commands: {
         pick: {
             action: "select",
