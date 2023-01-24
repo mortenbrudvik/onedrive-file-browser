@@ -31,6 +31,9 @@ const paramsTest: IFilePickerOptions = {
     search: {
         enabled: true
     },
+    tray: {
+        prompt: "selection-summary",
+    },            
     commands: {
         pick: {
             action: "select",
@@ -52,7 +55,6 @@ export type FileItem = {
     name: string;
     url: string;
 };
-    
 
 export const FilePicker = ({onClose, onPicked}: FilePickerProps) => {
 

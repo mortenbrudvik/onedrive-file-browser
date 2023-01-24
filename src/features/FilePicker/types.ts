@@ -22,9 +22,25 @@ export interface IFilePickerOptions {
      */
     accessibility?: IAccessibilityConfiguration;
     navigation?: INavigationConfiguration;
-    "search": {
+    search: {
         "enabled": true
-    }
+    },
+    tray?: {
+        /**
+         * Configures a component to render in the picker tray to the left of the commands.
+         * @default 'selection-summary'
+         */
+        prompt?: "selection-summary" | "save-as";
+        /**
+         * Configures use of the 'save-as' prompt.
+         */
+        saveAs?: {
+            /**
+             * Default file name to show in 'save-as' prompt.
+             */
+            fileName?: string;
+        };
+    };
 }
 export interface IAuthenticateCommand {
     command: 'authenticate';
