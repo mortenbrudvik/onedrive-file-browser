@@ -147,6 +147,8 @@ function Browser(props: BrowserProps) {
 
                 form.submit();
 
+                form.remove();
+
                 const messageEventHandler = (event: MessageEvent<any>) => {
                     if (event.source && event.source === contentWindow) {
 

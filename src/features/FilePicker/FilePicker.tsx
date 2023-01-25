@@ -48,7 +48,7 @@ const paramsTest: IFilePickerOptions = {
 type FilePickerProps = {
     onClose: () => void;
     onPicked: (files: FileItem[]) => void;
-}
+};
 
 export type FileItem = {
     id: string;
@@ -60,9 +60,8 @@ export const FilePicker = ({onClose, onPicked}: FilePickerProps) => {
 
     return (
         <div>
-            <Browser baseUrl="https://x2lzs.sharepoint.com/" options={paramsTest} onClose={onClose} onPicked={(files) => {
-
-                onPicked(files.map((file) => {
+            <Browser baseUrl="https://x2lzs.sharepoint.com/" options={paramsTest} onClose={onClose} onPicked={async (files) => {
+                onPicked(files.map( (file) => {
                     return {
                         id: file.id,
                         name: file.name,
