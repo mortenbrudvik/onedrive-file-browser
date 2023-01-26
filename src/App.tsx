@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {FilePicker} from "./features";
 import {Button, Divider, Group, Modal, Table, Title} from "@mantine/core";
-import {FileItem} from "./features/FilePicker/FilePicker";
 import {useIsSignedIn} from "./hooks/useIsSignIn";
 import {Login, MgtTemplateProps, Person, PersonViewType} from "@microsoft/mgt-react";
 import {User} from "@microsoft/microsoft-graph-types";
 import './App.css';
+import {FileItem} from "./features/FilePicker/types/FileItem";
 
 function App() {
     
